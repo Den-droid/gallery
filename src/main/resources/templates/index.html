@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title th:utext="${pageTitle}"></title>
+</head>
+<div layout:fragment="styles">
+    <link rel="stylesheet" th:href="@{'/assets/styles/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/jquery.fancybox.min.css'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/styles.css'}">
+</div>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/}">Карпати</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/photo/add-photo}">Add Image</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <h1 class="text-center">Галерея</h1>
+        <div class="row">
+
+            <div class="col-lg-3 col-md-4 col-6 thumb" th:each="photo : ${photos}">
+                <a data-fancybox="gallery" th:href="@{'/get-image/' + ${photo.getName()}}">
+                    <img class="img-fluid" th:src="@{'/get-image/' + ${photo.getName()}}" alt="...">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div layout:fragment="scripts">
+    <script src='https://unpkg.com/@popperjs/core@2'></script>
+    <script th:src="@{'/assets/scripts/jquery-3.5.1.min.js'}"></script>
+    <script th:src="@{'/assets/scripts/jquery.fancybox.min.js'}"></script>
+    <script th:src="@{'/assets/scripts/bootstrap.min.js'}"></script>
+</div>
+
+</body>
+
+</html>
